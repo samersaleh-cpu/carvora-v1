@@ -2,68 +2,59 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#071018">
-<meta name="description" content="CARVORA — know what your car needs next."><title>CARVORA — Know what your car needs next</title><link rel="stylesheet" href="styles.css">
+<meta name="description" content="CARVORA — know what your car needs next."><title>CARVORA — Your car, simplified</title><link rel="stylesheet" href="styles.css">
 <style>
-.hero{padding-bottom:28px}.hero h1{max-width:720px}.hero .actions{margin-top:22px}.simple-note{margin-top:12px;font-size:.9rem;color:var(--muted,#8793a5)}
-.primary-result{display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:center}.score-main{text-align:center}.score-main .num{font-size:72px;line-height:1}.answer{padding:20px;border-radius:16px;background:rgba(255,255,255,.035)}.answer h3{margin:4px 0 8px}.quick-actions{display:flex;flex-wrap:wrap;gap:10px}.advanced{margin-top:18px}.advanced summary{cursor:pointer;font-weight:700;padding:16px 0}.advanced-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.section-help{margin:-6px 0 14px}.footer-actions{margin-top:18px}
+.hero{text-align:center;padding-bottom:24px}.hero h1{max-width:650px;margin-left:auto;margin-right:auto}.hero p{max-width:520px;margin-left:auto;margin-right:auto}.hero .actions{justify-content:center;margin-top:22px}.simple-note{margin-top:12px;font-size:.9rem;color:var(--muted,#8793a5)}
+#dashboard{margin-top:10px}.primary-result{display:grid;grid-template-columns:170px 1fr;gap:24px;align-items:center}.score-main{text-align:center}.score-main .num{font-size:68px;line-height:1}.answer{padding:20px;border-radius:16px;background:rgba(255,255,255,.035)}.answer h3{margin:4px 0 8px}.quick-actions{display:flex;flex-wrap:wrap;gap:10px}
+#maintenance,#calculator,#priorities,.advanced,#proSection,#freeTools{display:none}.unlocked #maintenance,.unlocked #calculator,.unlocked #priorities,.unlocked .advanced,.unlocked #proSection,.unlocked #freeTools{display:block}.unlocked .advanced{margin-top:18px}.advanced summary{cursor:pointer;font-weight:700;padding:16px 0}.advanced-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.section-help{margin:-6px 0 14px}.footer-actions{margin-top:18px}.next-hint{text-align:center;margin:18px 0 0;color:var(--muted,#8793a5);font-size:.9rem}
 @media(max-width:700px){.primary-result{grid-template-columns:1fr;gap:10px}.score-main{text-align:left}.score-main .num{font-size:58px}.advanced-grid{grid-template-columns:1fr}.hero h1{font-size:2.35rem}.top nav{display:none}.quick-actions .btn{width:100%}}
 </style>
 </head>
-<body><div class="wrap">
+<body><div class="wrap" id="app">
 <header class="top"><a class="brand" href="#top">CARV<span>O</span>RA</a><div class="badge">FREE</div></header>
-
 <section class="hero" id="top">
-<div class="eyebrow">Simple vehicle intelligence</div>
-<h1>Know what your car needs next.</h1>
-<p>Enter your car once. CARVORA turns its condition, maintenance and costs into a simple next step. No account.</p>
-<div class="actions"><button class="btn primary" id="addVehicle">Start with my car</button><button class="btn" id="resetDemo">See a 60-second demo</button></div>
-<div class="simple-note">Your vehicle data stays in this browser.</div>
+<div class="eyebrow">Your car, simplified</div>
+<h1>What does your car need next?</h1>
+<p>Enter a few details. CARVORA gives you one clear answer first — the details come later.</p>
+<div class="actions"><button class="btn primary" id="addVehicle">Start with my car</button><button class="btn" id="resetDemo">Try with a demo car</button></div>
+<div class="simple-note">No account. Your data stays in this browser.</div>
 </section>
-
 <section class="card wide primary-result" id="dashboard">
-<div class="score-main"><div class="label">Car Health Score</div><div class="num good" id="score">100</div><div id="scoreText" class="muted">Strong baseline</div><div class="scorebar"><span id="scoreBar"></span></div></div>
-<div class="answer"><div class="eyebrow">Your next step</div><h3 id="nextService">No urgent items</h3><p class="muted" id="answerText">Add your vehicle and maintenance history to get a clear priority.</p><div class="quick-actions"><button class="btn primary" id="openCalc">Check my costs</button><button class="btn" id="resetDemo2">Load demo data</button></div></div>
+<div class="score-main"><div class="label">Health</div><div class="num good" id="score">100</div><div id="scoreText" class="muted">Add your car to calculate</div><div class="scorebar"><span id="scoreBar"></span></div></div>
+<div class="answer"><div class="eyebrow">Next step</div><h3 id="nextService">Start with your car</h3><p class="muted" id="answerText">Tell us your make, model, year and mileage. That is all you need to begin.</p><div class="quick-actions"><button class="btn primary" id="openCalc">Check costs</button><button class="btn" id="resetDemo2">Use demo data</button></div></div>
 </section>
-
 <section class="card wide" id="vehicle">
-<div class="section-head"><div><div class="eyebrow">Step 1</div><h2>Your vehicle</h2></div><span class="pill" id="vehicleCount">1 vehicle</span></div>
-<p class="muted section-help">Start with the basics. You can add maintenance and costs later.</p>
-<form class="form" id="vehicleForm"><input id="make" placeholder="Make" required><input id="model" placeholder="Model" required><input id="year" type="number" min="1950" max="2100" placeholder="Year" required><input id="mileage" type="number" min="0" placeholder="Mileage (km)" required><select id="fuelType"><option>Petrol</option><option>Diesel</option><option>Hybrid</option><option>Electric</option></select><input id="purchasePrice" type="number" min="0" placeholder="Purchase price ($)"><button class="btn primary full" type="submit">Save my car</button></form>
+<div class="section-head"><div><div class="eyebrow">Just 4 things</div><h2>Your car</h2></div></div>
+<p class="muted section-help">You can add everything else later.</p>
+<form class="form" id="vehicleForm"><input id="make" placeholder="Make (Toyota)" required><input id="model" placeholder="Model (Corolla)" required><input id="year" type="number" min="1950" max="2100" placeholder="Year (2020)" required><input id="mileage" type="number" min="0" placeholder="Mileage in km" required><select id="fuelType"><option>Petrol</option><option>Diesel</option><option>Hybrid</option><option>Electric</option></select><input id="purchasePrice" type="number" min="0" placeholder="Purchase price (optional)"><button class="btn primary full" type="submit">Show me my car health</button></form>
+<p class="next-hint">After this, CARVORA will show your next priority.</p>
 </section>
-
 <section class="card wide" id="maintenance">
-<div class="section-head"><div><div class="eyebrow">Step 2</div><h2>What have you serviced?</h2></div><button class="btn primary" id="addMaintenance">+ Add</button></div>
-<p class="muted section-help">Add only what you know. CARVORA will flag what is overdue or coming soon.</p><div class="list" id="maintenanceList"></div>
+<div class="section-head"><div><div class="eyebrow">Optional</div><h2>Maintenance</h2></div><button class="btn primary" id="addMaintenance">+ Add</button></div>
+<p class="muted section-help">Add only services you remember.</p><div class="list" id="maintenanceList"></div>
 </section>
-
 <section class="card wide" id="calculator">
-<div class="section-head"><div><div class="eyebrow">Step 3</div><h2>What does your car cost?</h2></div><span class="pill">Free</span></div>
-<form class="form" id="costForm"><input id="fuel" type="number" min="0" placeholder="Fuel / month"><input id="service" type="number" min="0" placeholder="Maintenance / month"><input id="insurance" type="number" min="0" placeholder="Insurance / month"><input id="other" type="number" min="0" placeholder="Other / month"><input id="annualKm" class="full" type="number" min="0" placeholder="Annual driving (km)"><button class="btn primary full" type="submit">Calculate my cost</button></form><div class="cost" id="total">$0</div><div class="cost-grid"><div><span class="label">Annual</span><b id="annualCost2">$0</b></div><div><span class="label">Cost / km</span><b id="costPerKm">—</b></div></div>
+<div class="section-head"><div><div class="eyebrow">Optional</div><h2>Car cost</h2></div><span class="pill">Free</span></div>
+<form class="form" id="costForm"><input id="fuel" type="number" min="0" placeholder="Fuel / month"><input id="service" type="number" min="0" placeholder="Maintenance / month"><input id="insurance" type="number" min="0" placeholder="Insurance / month"><input id="other" type="number" min="0" placeholder="Other / month"><input id="annualKm" class="full" type="number" min="0" placeholder="Annual driving (km)"><button class="btn primary full" type="submit">Calculate</button></form><div class="cost" id="total">$0</div><div class="cost-grid"><div><span class="label">Annual</span><b id="annualCost2">$0</b></div><div><span class="label">Cost / km</span><b id="costPerKm">—</b></div></div>
 </section>
-
 <section class="card wide" id="priorities">
-<div class="section-head"><div><div class="eyebrow">The answer</div><h2>Smart Priorities</h2></div><span class="pill">Automatic</span></div>
-<div id="priorityList" class="list"></div><div id="priorityList2" class="probox"></div>
+<div class="section-head"><div><div class="eyebrow">Your answer</div><h2>What to do next</h2></div></div><div id="priorityList" class="list"></div><div id="priorityList2" class="probox"></div>
 </section>
-
-<section class="card wide"><details class="advanced"><summary>More tools — garage, analytics, backup</summary>
-<div class="advanced-grid">
-<div class="card"><div class="section-head"><h2>Garage</h2><span class="pill" id="activeVehicle">Current</span></div><div class="garage" id="garageList"></div><div class="muted garage-hint">Manage multiple vehicles here.</div></div>
-<div class="card" id="analytics"><div class="section-head"><h2>Ownership Analytics</h2><span class="pill">Free</span></div><div class="metrics"><div class="metric"><span class="label">Service records</span><strong id="recordCount">0</strong></div><div class="metric"><span class="label">Service spend</span><strong id="serviceSpend">$0</strong></div><div class="metric"><span class="label">Avg. service cost</span><strong id="avgService">$0</strong></div></div><p class="muted" id="analyticsText">Add service records to see maintenance spending patterns.</p></div>
-</div>
-<div class="actions footer-actions"><button class="btn" id="exportData">Export backup</button><button class="btn" id="importData">Import backup</button><input id="importFile" type="file" accept="application/json" hidden><button class="btn dangerBtn" id="clearData">Clear data</button></div>
-</details></section>
-
-<section class="card wide"><div class="section-head"><div><div class="eyebrow">When you need more</div><h2>CARVORA Pro</h2></div><span class="pro">PRO</span></div><p class="muted">Professional vehicle reports, ownership comparisons and Keep / Service / Watch guidance.</p><a class="btn primary" href="pro.html">See Pro →</a></section>
-
-<section class="card wide"><div class="section-head"><h2>Free tools</h2><span class="pill">No account</span></div><div class="pro-grid"><div><b><a href="car-cost-calculator.html">Car Cost Calculator</a></b><small>Estimate ownership cost.</small></div><div><b><a href="maintenance-cost.html">Maintenance Planning</a></b><small>Plan upcoming service.</small></div><div><b><a href="car-health-score.html">Car Health Score</a></b><small>Understand your score.</small></div></div></section>
-
+<section class="card wide"><details class="advanced"><summary>More tools</summary>
+<div class="advanced-grid"><div class="card"><div class="section-head"><h2>Garage</h2><span class="pill" id="activeVehicle">Current</span></div><div class="garage" id="garageList"></div><div class="muted garage-hint">Manage multiple vehicles here.</div></div>
+<div class="card" id="analytics"><div class="section-head"><h2>Ownership Analytics</h2><span class="pill">Free</span></div><div class="metrics"><div class="metric"><span class="label">Service records</span><strong id="recordCount">0</strong></div><div class="metric"><span class="label">Service spend</span><strong id="serviceSpend">$0</strong></div><div class="metric"><span class="label">Avg. service cost</span><strong id="avgService">$0</strong></div></div><p class="muted" id="analyticsText">Add service records to see spending patterns.</p></div></div>
+<div class="actions footer-actions"><button class="btn" id="exportData">Export backup</button><button class="btn" id="importData">Import backup</button><input id="importFile" type="file" accept="application/json" hidden><button class="btn dangerBtn" id="clearData">Clear data</button></div></details></section>
+<section class="card wide" id="proSection"><div class="section-head"><div><div class="eyebrow">When you need more</div><h2>CARVORA Pro</h2></div><span class="pro">PRO</span></div><p class="muted">Professional reports, comparisons and Keep / Service / Watch guidance.</p><a class="btn primary" href="pro.html">See Pro →</a></section>
+<section class="card wide" id="freeTools"><div class="section-head"><h2>Free tools</h2><span class="pill">No account</span></div><div class="pro-grid"><div><b><a href="car-cost-calculator.html">Car Cost Calculator</a></b><small>Estimate ownership cost.</small></div><div><b><a href="maintenance-cost.html">Maintenance Planning</a></b><small>Plan upcoming service.</small></div><div><b><a href="car-health-score.html">Car Health Score</a></b><small>Understand your score.</small></div></div></section>
 <footer>CARVORA · Informational estimates only; not a mechanical diagnosis. Data stays locally in your browser.</footer></div>
-
 <div class="modal" id="maintenanceModal" aria-hidden="true"><div class="modal-card"><div class="section-head"><h2>Maintenance record</h2><button class="btn" type="button" onclick="closeMaintenance()">×</button></div><form class="form" id="maintenanceForm"><input type="hidden" id="mIndex"><input id="mName" class="full" placeholder="Service name" required><input id="mDate" type="date" required><input id="mMileage" type="number" min="0" placeholder="Service mileage"><input id="mIntervalKm" type="number" min="0" placeholder="Repeat every km"><input id="mIntervalMonths" type="number" min="0" placeholder="Repeat every months"><input id="mCost" type="number" min="0" placeholder="Cost ($)"><input id="mNotes" class="full" placeholder="Notes"><div class="modal-actions full"><button class="btn" id="cancelMaintenance" type="button">Cancel</button><button class="btn primary" type="submit">Save record</button></div></form></div></div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <script src="app.js"></script><script>
-const originalRender=window.render;
-document.getElementById('resetDemo2')?.addEventListener('click',()=>document.getElementById('resetDemo')?.click());
-document.getElementById('openCalc')?.addEventListener('click',()=>document.getElementById('calculator')?.scrollIntoView({behavior:'smooth'}));
+const app=document.getElementById('app');
+const reveal=()=>app.classList.add('unlocked');
+document.getElementById('addVehicle')?.addEventListener('click',()=>document.getElementById('vehicle')?.scrollIntoView({behavior:'smooth'}));
+document.getElementById('resetDemo2')?.addEventListener('click',()=>{document.getElementById('resetDemo')?.click();setTimeout(reveal,100)});
+document.getElementById('resetDemo')?.addEventListener('click',()=>setTimeout(reveal,150));
+document.getElementById('openCalc')?.addEventListener('click',()=>{reveal();document.getElementById('calculator')?.scrollIntoView({behavior:'smooth'})});
+document.getElementById('vehicleForm')?.addEventListener('submit',()=>setTimeout(reveal,150));
 </script></body></html>
