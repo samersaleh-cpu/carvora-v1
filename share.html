@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071018">
+<meta name="description" content="Free car ownership cost calculator and private vehicle maintenance workspace from CARVORA.">
+<meta property="og:title" content="CARVORA — Know what your car costs">
+<meta property="og:description" content="Estimate monthly ownership cost, track maintenance and understand your vehicle health for free.">
+<title>CARVORA — Know what your car costs</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+.share-page{max-width:760px;margin:0 auto;padding:32px 18px 64px}.share-hero{padding:56px 0 34px}.share-hero h1{font-size:clamp(42px,9vw,76px);line-height:.98;letter-spacing:-.045em;margin:12px 0 18px}.share-hero p{font-size:18px;line-height:1.6;max-width:650px}.share-card{border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px;margin:18px 0;background:rgba(255,255,255,.03)}.share-card h2{margin:0 0 8px}.share-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.share-actions .btn{flex:1;min-width:190px;text-align:center}.steps{display:grid;gap:12px;margin-top:18px}.step{display:flex;gap:14px;align-items:flex-start}.step b{display:block;margin-bottom:4px}.step-num{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);font-weight:700;flex:0 0 30px}.micro{font-size:13px;color:rgba(255,255,255,.6);line-height:1.5}
+</style>
+</head>
+<body><div class="share-page">
+<header class="top"><a class="brand" href="index.html">CARV<span>O</span>RA</a><a class="btn" href="index.html">Open Garage</a></header>
+<section class="share-hero"><div class="eyebrow">Free · Private · No account</div><h1>Know what your car costs.</h1><p>Use CARVORA to estimate ownership cost, keep maintenance on schedule and build a simple health picture of your vehicle — without creating an account.</p><div class="share-actions"><a class="btn primary" href="calculator.html">Calculate my car cost →</a><button class="btn" id="shareBtn">Share CARVORA</button></div></section>
+<section class="share-card"><h2>Start with the free calculator</h2><p class="muted">Enter fuel, maintenance, insurance and other monthly costs. CARVORA turns them into an annual estimate and cost per kilometre.</p><div class="steps"><div class="step"><span class="step-num">1</span><div><b>Estimate</b><span class="micro">Get a cost baseline in under a minute.</span></div></div><div class="step"><span class="step-num">2</span><div><b>Build your garage</b><span class="micro">Save your vehicle profile and maintenance history locally.</span></div></div><div class="step"><span class="step-num">3</span><div><b>Track what matters</b><span class="micro">See priorities, service spending and ownership analytics.</span></div></div></div></section>
+<section class="share-card"><h2>Why CARVORA?</h2><p class="muted">It is designed as a practical owner workspace, not a repair-shop marketplace. Your current data stays in your browser and the core tools are free.</p></section>
+<p class="micro">CARVORA provides informational estimates only and is not a mechanical diagnosis. By using the share button, your device may open its native sharing interface.</p>
+</div><script>
+const shareBtn=document.getElementById('shareBtn');
+shareBtn.addEventListener('click',async()=>{const data={title:'CARVORA — Vehicle Intelligence',text:'Free car ownership cost calculator + private maintenance tracker.',url:new URL('calculator.html',location.href).href};try{if(navigator.share){await navigator.share(data)}else{await navigator.clipboard.writeText(data.url);shareBtn.textContent='Link copied';setTimeout(()=>shareBtn.textContent='Share CARVORA',1800)}}catch(e){}});
+</script></body></html>
