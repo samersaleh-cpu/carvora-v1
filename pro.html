@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="CARVORA Pro Insights — advanced ownership and maintenance intelligence for your vehicle.">
+<meta property="og:title" content="CARVORA Pro Insights">
+<meta property="og:description" content="See projected ownership cost, maintenance risk and vehicle intelligence in one private workspace.">
+<title>CARVORA — Pro Insights</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+.pro-hero{padding:64px 0 32px}.pro-hero h1{max-width:760px}.pro-tag{display:inline-flex;padding:7px 11px;border:1px solid rgba(255,255,255,.16);border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.insight-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.insight strong{display:block;font-size:30px;margin:12px 0 4px}.insight .label{display:block}.note{font-size:13px;line-height:1.6}.cta-row{display:flex;gap:10px;flex-wrap:wrap}.mini-list{display:grid;gap:10px}.mini-row{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08)}.mini-row:last-child{border-bottom:0}@media(max-width:760px){.insight-grid{grid-template-columns:1fr}.pro-hero{padding-top:36px}}
+</style>
+</head>
+<body><div class="wrap">
+<header class="top"><a class="brand" href="index.html">CARV<span>O</span>RA</a><a class="btn" href="index.html">My Garage</a></header>
+<section class="hero pro-hero"><span class="pro-tag">PRO PREVIEW</span><div class="eyebrow">Advanced vehicle intelligence</div><h1>Turn your car data into decisions.</h1><p>CARVORA Pro is designed around deeper ownership intelligence: projected costs, maintenance risk and vehicle-level planning. This preview runs entirely in your browser using the same local garage data.</p><div class="cta-row"><a class="btn primary" href="index.html">Open my garage →</a><a class="btn" href="calculator.html">Free cost calculator</a></div></section>
+<main class="grid">
+<section class="card wide"><div class="section-head"><h2>Pro Insights</h2><span class="pro">Preview</span></div><div class="insight-grid">
+<div class="card insight"><span class="label">12-month ownership projection</span><strong id="projection">—</strong><span class="muted">Based on current monthly ownership costs.</span></div>
+<div class="card insight"><span class="label">Maintenance risk</span><strong id="risk">—</strong><span id="riskText" class="muted">—</span></div>
+<div class="card insight"><span class="label">Vehicle age</span><strong id="age">—</strong><span class="muted">Planning context, not a diagnosis.</span></div>
+</div></section>
+<section class="card half"><div class="section-head"><h2>Cost mix</h2><span class="pill">Private</span></div><div class="mini-list" id="costMix"></div></section>
+<section class="card half"><div class="section-head"><h2>What Pro adds</h2><span class="pro">Planned</span></div><div class="mini-list"><div class="mini-row"><span>Advanced ownership projections</span><b>Pro</b></div><div class="mini-row"><span>Maintenance risk prioritization</span><b>Pro</b></div><div class="mini-row"><span>Cross-device cloud sync</span><b>Pro</b></div><div class="mini-row"><span>Smart reminders</span><b>Pro</b></div></div></section>
+<section class="card wide"><div class="section-head"><h2>How the Pro model works</h2><span class="pill">No backend</span></div><p class="note muted">CARVORA currently calculates these insights locally from your vehicle profile, maintenance records and ownership costs. There is no payment processor, account system or cloud database connected yet, so this page is a product preview rather than a paid checkout.</p><div class="cta-row"><a class="btn primary" href="index.html">Build my garage →</a><a class="btn" href="share.html">Share CARVORA</a></div></section>
+</main><footer>CARVORA Pro Preview · Informational planning estimates only.</footer></div>
+<script>
+const STORAGE='carvora-v2-state';const money=n=>'$'+Number(n||0).toLocaleString(undefined,{maximumFractionDigits:0});
+function read(){try{const s=JSON.parse(localStorage.getItem(STORAGE)||'{}');return s.vehicles?.find(v=>v.id===s.activeId)||s.vehicles?.[0]||null}catch{return null}}
+const v=read();
+if(!v){document.getElementById('projection').textContent='No garage';document.getElementById('risk').textContent='—';document.getElementById('age').textContent='—';document.getElementById('costMix').innerHTML='<div class="empty">Add a vehicle in CARVORA first.</div>'}
+else{
+ const c=v.costs||{}, monthly=['fuel','service','insurance','other'].reduce((a,k)=>a+Number(c[k]||0),0), records=Array.isArray(v.maintenance)?v.maintenance:[];
+ const overdue=records.filter(m=>{let due=false;if(Number(m.intervalKm)>0&&Number(m.mileage)>0)due=Number(v.mileage||0)>=Number(m.mileage)+Number(m.intervalKm);if(Number(m.intervalMonths)>0&&m.date){const d=new Date(m.date+'T00:00:00');d.setMonth(d.getMonth()+Number(m.intervalMonths));due=due||new Date()>=d}return due}).length;
+ const soon=records.filter(m=>!overdue&&Number(m.intervalKm)>0&&Number(m.mileage)>0&&Number(m.mileage)+Number(m.intervalKm)-Number(v.mileage||0)<=1000).length;
+ const riskScore=Math.min(100,overdue*30+soon*10+(records.length?0:20));
+ document.getElementById('projection').textContent=money(monthly*12);
+ document.getElementById('risk').textContent=riskScore>=60?'High':riskScore>=30?'Medium':'Low';
+ document.getElementById('riskText').textContent=overdue?`${overdue} overdue item${overdue===1?'':'s'} detected.`:soon?`${soon} item${soon===1?'':'s'} approaching due.`:'No immediate flags detected.';
+ const age=Math.max(0,new Date().getFullYear()-Number(v.year||new Date().getFullYear()));document.getElementById('age').textContent=age+(age===1?' year':' years');
+ const labels={fuel:'Fuel',service:'Maintenance',insurance:'Insurance',other:'Other'};document.getElementById('costMix').innerHTML=Object.keys(labels).map(k=>`<div class="mini-row"><span>${labels[k]}</span><b>${money(c[k])}/mo</b></div>`).join('')+`<div class="mini-row"><span>Total</span><b>${money(monthly)}/mo</b></div>`;
+}
+</script></body></html>
