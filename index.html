@@ -1,90 +1,20 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#071018">
-<meta name="description" content="CARVORA helps drivers track vehicle health, maintenance priorities and ownership cost.">
-<meta property="og:title" content="CARVORA — Vehicle Intelligence">
-<meta property="og:description" content="Track your car's health, maintenance and ownership cost in one private dashboard.">
-<title>CARVORA — Vehicle Intelligence</title>
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<div class="wrap">
-<header class="top">
-  <a class="brand" href="#top" aria-label="CARVORA home">CARV<span>O</span>RA</a>
-  <nav><a href="#vehicle">Vehicle</a><a href="#maintenance">Maintenance</a><a href="#calculator">Costs</a></nav>
-  <div class="badge">V1 · FREE</div>
-</header>
-<section class="hero" id="top">
-  <div class="eyebrow">Private vehicle intelligence</div>
-  <h1>Know your car before your car tells you.</h1>
-  <p>One focused dashboard for vehicle health, maintenance priorities and ownership cost. Your V1 data stays in this browser.</p>
-  <div class="actions"><button class="btn primary" id="addVehicle">Add vehicle</button><button class="btn" id="openCalc">Calculate ownership cost</button></div>
-  <div class="trust"><span>✓ No account</span><span>✓ No backend</span><span>✓ Local storage</span></div>
-</section>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#071018">
+<meta name="description" content="CARVORA vehicle intelligence: health, maintenance schedules and ownership cost."><meta property="og:title" content="CARVORA — Vehicle Intelligence"><meta property="og:description" content="Manage vehicles, maintenance schedules and ownership cost privately."><title>CARVORA — Vehicle Intelligence</title><link rel="stylesheet" href="styles.css">
+</head><body><div class="wrap">
+<header class="top"><a class="brand" href="#top">CARV<span>O</span>RA</a><nav><a href="#vehicle">Vehicle</a><a href="#maintenance">Maintenance</a><a href="#calculator">Costs</a><a href="#analytics">Analytics</a></nav><div class="badge">V2 · FREE</div></header>
+<section class="hero" id="top"><div class="eyebrow">Vehicle intelligence workspace</div><h1>Know what your car needs next.</h1><p>Track multiple vehicles, calculate service due dates, understand ownership cost and keep your data in your browser.</p><div class="actions"><button class="btn primary" id="addVehicle">Add vehicle</button><button class="btn" id="openCalc">Calculate cost</button></div><div class="trust"><span>✓ No account</span><span>✓ No backend</span><span>✓ Private local data</span></div></section>
 <main class="grid">
-<section class="card score">
-  <div class="label">Car Health Score</div><div class="num good" id="score">100</div><div id="scoreText" class="muted">Strong baseline</div>
-  <div class="scorebar"><span id="scoreBar"></span></div><small class="muted">Informational estimate based on your profile and maintenance records.</small>
-</section>
-<section class="card wide">
-  <div class="section-head"><h2>Dashboard</h2><span class="pill">Local data</span></div>
-  <div class="metrics">
-    <div class="metric"><span class="label">Next priority</span><strong id="nextService">None</strong></div>
-    <div class="metric"><span class="label">Monthly cost</span><strong id="monthly">$0</strong></div>
-    <div class="metric"><span class="label">Purchase value</span><strong id="ownership">Not set</strong></div>
-  </div>
-  <div class="list" id="priorityList"></div>
-</section>
-<section class="card half" id="vehicle">
-  <div class="section-head"><h2>Vehicle Profile</h2><span class="pill">Free</span></div>
-  <form class="form" id="vehicleForm">
-    <input id="make" placeholder="Make" autocomplete="off" required>
-    <input id="model" placeholder="Model" autocomplete="off" required>
-    <input id="year" type="number" min="1950" max="2100" placeholder="Year" required>
-    <input id="mileage" type="number" min="0" placeholder="Mileage (km)" required>
-    <select id="fuelType"><option>Petrol</option><option>Diesel</option><option>Hybrid</option><option>Electric</option></select>
-    <input id="purchasePrice" type="number" min="0" placeholder="Purchase price ($)">
-    <button class="btn primary full" type="submit">Save vehicle</button>
-  </form>
-</section>
-<section class="card half">
-  <div class="section-head"><h2>Smart Priorities</h2><span class="pill">Automatic</span></div>
-  <div id="priorityList2" class="probox"><span class="muted">Add maintenance records to generate priorities.</span></div>
-</section>
-<section class="card half" id="maintenance">
-  <div class="section-head"><h2>Maintenance Tracker</h2><button class="btn primary" id="addMaintenance">+ Add</button></div>
-  <div class="list" id="maintenanceList"></div>
-</section>
-<section class="card half" id="calculator">
-  <div class="section-head"><h2>Ownership Cost</h2><span class="pill">Free</span></div>
-  <form class="form" id="costForm">
-    <input id="fuel" type="number" min="0" placeholder="Fuel / month">
-    <input id="service" type="number" min="0" placeholder="Maintenance / month">
-    <input id="insurance" type="number" min="0" placeholder="Insurance / month">
-    <input id="other" type="number" min="0" placeholder="Other / month">
-    <input id="annualKm" class="full" type="number" min="0" placeholder="Annual driving (km)">
-    <button class="btn primary full" type="submit">Update costs</button>
-  </form>
-  <div class="cost" id="total">$0</div>
-  <div class="cost-grid"><div><span class="label">Annual</span><b id="annualCost">$0</b></div><div><span class="label">Cost / km</span><b id="costPerKm">—</b></div></div>
-</section>
-<section class="card wide">
-  <div class="section-head"><h2>CARVORA Pro</h2><span class="pro">Roadmap</span></div>
-  <div class="pro-grid"><div><b>Multiple vehicles</b><small>Manage a household or garage.</small></div><div><b>Service analytics</b><small>See where your money goes.</small></div><div><b>Reminders</b><small>Never miss a service interval.</small></div><div><b>Cloud sync</b><small>Access your garage anywhere.</small></div></div>
-  <p class="muted pro-note">V1 deliberately has no fake checkout. Paid features will be connected only when the product is ready.</p>
-</section>
-</main>
-<div class="actions utility"><button class="btn" id="resetDemo">Load demo data</button><button class="btn" id="exportData">Export data</button><button class="btn dangerBtn" id="clearData">Clear data</button></div>
-<footer>CARVORA V1 · Informational estimates only; not a mechanical diagnosis. Data is stored locally in your browser.</footer>
-</div>
-<div class="modal" id="maintenanceModal" aria-hidden="true">
-<div class="modal-card"><div class="section-head"><h2>Maintenance record</h2><button class="btn" type="button" onclick="closeMaintenance()" aria-label="Close">×</button></div>
-<form class="form" id="maintenanceForm">
-<input type="hidden" id="mIndex"><input id="mName" class="full" placeholder="Service name" required><input id="mDate" type="date"><input id="mMileage" type="number" min="0" placeholder="Service mileage"><input id="mIntervalKm" type="number" min="0" placeholder="Repeat every km"><input id="mCost" type="number" min="0" placeholder="Cost ($)"><input id="mNotes" class="full" placeholder="Notes"><div class="modal-actions full"><button class="btn" id="cancelMaintenance" type="button">Cancel</button><button class="btn primary" type="submit">Save record</button></div>
-</form></div></div>
-<div id="toast" class="toast" role="status" aria-live="polite"></div>
-<script src="app.js"></script>
-</body></html>
+<section class="card wide"><div class="section-head"><h2>Garage</h2><span class="pill" id="vehicleCount">1 vehicle</span></div><div class="garage" id="garageList"></div></section>
+<section class="card score"><div class="label">Car Health Score</div><div class="num good" id="score">100</div><div id="scoreText" class="muted">Strong baseline</div><div class="scorebar"><span id="scoreBar"></span></div><small class="muted">Estimate based on profile age, mileage and maintenance status.</small></section>
+<section class="card wide"><div class="section-head"><h2>Dashboard</h2><span class="pill" id="activeVehicle">No vehicle</span></div><div class="metrics"><div class="metric"><span class="label">Next priority</span><strong id="nextService">None</strong></div><div class="metric"><span class="label">Monthly cost</span><strong id="monthly">$0</strong></div><div class="metric"><span class="label">Annual cost</span><strong id="annualCost">$0</strong></div></div><div class="list" id="priorityList"></div></section>
+<section class="card half" id="vehicle"><div class="section-head"><h2>Vehicle Profile</h2><span class="pill">Free</span></div><form class="form" id="vehicleForm"><input id="make" placeholder="Make" required><input id="model" placeholder="Model" required><input id="year" type="number" min="1950" max="2100" placeholder="Year" required><input id="mileage" type="number" min="0" placeholder="Mileage (km)" required><select id="fuelType"><option>Petrol</option><option>Diesel</option><option>Hybrid</option><option>Electric</option></select><input id="purchasePrice" type="number" min="0" placeholder="Purchase price ($)"><button class="btn primary full" type="submit">Save vehicle</button></form></section>
+<section class="card half"><div class="section-head"><h2>Smart Priorities</h2><span class="pill">Automatic</span></div><div id="priorityList2" class="probox"></div></section>
+<section class="card half" id="maintenance"><div class="section-head"><h2>Maintenance Tracker</h2><button class="btn primary" id="addMaintenance">+ Add</button></div><div class="list" id="maintenanceList"></div></section>
+<section class="card half" id="calculator"><div class="section-head"><h2>Ownership Cost</h2><span class="pill">Free</span></div><form class="form" id="costForm"><input id="fuel" type="number" min="0" placeholder="Fuel / month"><input id="service" type="number" min="0" placeholder="Maintenance / month"><input id="insurance" type="number" min="0" placeholder="Insurance / month"><input id="other" type="number" min="0" placeholder="Other / month"><input id="annualKm" class="full" type="number" min="0" placeholder="Annual driving (km)"><button class="btn primary full" type="submit">Update costs</button></form><div class="cost" id="total">$0</div><div class="cost-grid"><div><span class="label">Annual</span><b id="annualCost2">$0</b></div><div><span class="label">Cost / km</span><b id="costPerKm">—</b></div></div></section>
+<section class="card wide" id="analytics"><div class="section-head"><h2>Ownership Analytics</h2><span class="pill">V2</span></div><div class="metrics"><div class="metric"><span class="label">Service records</span><strong id="recordCount">0</strong></div><div class="metric"><span class="label">Service spend</span><strong id="serviceSpend">$0</strong></div><div class="metric"><span class="label">Avg. service cost</span><strong id="avgService">$0</strong></div></div><div class="probox"><b>What this tells you</b><p class="muted" id="analyticsText">Add service records to see maintenance spending patterns.</p></div></section>
+<section class="card wide"><div class="section-head"><h2>CARVORA Pro</h2><span class="pro">Planned</span></div><div class="pro-grid"><div><b>Cloud sync</b><small>Use your garage across devices.</small></div><div><b>Smart reminders</b><small>Service alerts before due dates.</small></div><div><b>Advanced analytics</b><small>Long-term ownership trends.</small></div><div><b>AI vehicle insights</b><small>Explain risks and priorities.</small></div></div><p class="muted pro-note">No fake checkout. Pro stays a roadmap until real infrastructure is connected.</p></section>
+</main><div class="actions utility"><button class="btn" id="resetDemo">Load demo</button><button class="btn" id="exportData">Export backup</button><button class="btn dangerBtn" id="clearData">Clear data</button></div><footer>CARVORA V2 · Informational estimates only; not a mechanical diagnosis. Data stays locally in your browser.</footer></div>
+<div class="modal" id="maintenanceModal" aria-hidden="true"><div class="modal-card"><div class="section-head"><h2>Maintenance record</h2><button class="btn" type="button" onclick="closeMaintenance()">×</button></div><form class="form" id="maintenanceForm"><input type="hidden" id="mIndex"><input id="mName" class="full" placeholder="Service name" required><input id="mDate" type="date" required><input id="mMileage" type="number" min="0" placeholder="Service mileage"><input id="mIntervalKm" type="number" min="0" placeholder="Repeat every km"><input id="mIntervalMonths" type="number" min="0" placeholder="Repeat every months"><input id="mCost" type="number" min="0" placeholder="Cost ($)"><input id="mNotes" class="full" placeholder="Notes"><div class="modal-actions full"><button class="btn" id="cancelMaintenance" type="button">Cancel</button><button class="btn primary" type="submit">Save record</button></div></form></div></div><div id="toast" class="toast" role="status" aria-live="polite"></div><script src="app.js"></script></body></html>
